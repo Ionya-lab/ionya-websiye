@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ionya | Strategic Consultancy for African Market Operations</title>
+    <meta name="description" content="Ionya helps international companies enter, operate, and thrive in African markets. Strategic market entry, operational support, and investment project sourcing across Africa.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; padding: 8rem 2rem 6rem; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -30%; right: -15%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+        }
+        .geo-pattern {
+            position: absolute; top: 50%; right: 5%; transform: translateY(-50%);
+            width: 400px; height: 400px; opacity: 0.04; pointer-events: none; color: var(--gold-primary);
+        }
+        .hero-inner { max-width: 1280px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 500; line-height: 1.12; max-width: 800px; margin-bottom: 1.8rem;
+        }
+        .hero h1 em { font-style: italic; color: var(--gold-light); }
+        .hero-sub {
+            font-size: 1.15rem; color: var(--text-secondary);
+            max-width: 560px; line-height: 1.8; margin-bottom: 3rem;
+        }
+        .hero-actions { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
+        .hero-stats {
+            display: flex; gap: 4rem; margin-top: 5rem;
+            padding-top: 3rem; border-top: 1px solid var(--border);
+        }
+        .hero-stat h3 {
+            font-family: var(--font-display); font-size: 2.2rem;
+            font-weight: 500; color: var(--gold-light); margin-bottom: 0.3rem;
+        }
+        .hero-stat p {
+            font-size: 0.82rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;
+        }
+        .pillars { margin-top: 3.5rem; }
+        .pillar-card { padding: 2.5rem; }
+        .pillar-card .num-accent { margin-bottom: 0.8rem; }
+        .value-grid { margin-top: 3.5rem; }
+        .value-item { padding: 2rem; border: 1px solid var(--border); border-radius: 8px; }
+        .value-item h4 {
+            font-family: var(--font-display); font-size: 1.15rem;
+            font-weight: 500; margin-bottom: 0.6rem;
+        }
+        .value-item p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
+        @media (max-width: 768px) {
+            .hero { padding: 7rem 1.5rem 4rem; }
+            .hero-stats { flex-direction: column; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo"><img src="ionya-logo-transparent.png" alt="Ionya"></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/services">Services</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/who-we-serve">Who We Serve</a></li>
+            <li><a href="/track-record">Track Record</a></li>
+            <li><a href="/contact" class="nav-cta">Get in Touch</a></li>
+        </ul>
+        <div class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <svg class="geo-pattern" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 0L400 200L200 400L0 200Z" stroke="currentColor" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M200 50L350 200L200 350L50 200Z" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
+        <path d="M200 100L300 200L200 300L100 200Z" stroke="currentColor" stroke-width="1" fill="none" opacity="0.2"/>
+        <circle cx="200" cy="200" r="150" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.15"/>
+    </svg>
+    <div class="hero-inner">
+        <div class="section-label fade-in-1">Strategic Consultancy</div>
+        <h1 class="fade-in-2">We don't just advise on Africa. We <em>operate</em> there.</h1>
+        <p class="hero-sub fade-in-3">Ionya provides international companies with the strategic relationships, operational support, and investment deal flow needed to succeed across African markets. Our network opens doors that take years to build.</p>
+        <div class="hero-actions fade-in-4">
+            <a href="/contact" class="btn-primary">Start a Conversation →</a>
+            <a href="/services" class="btn-secondary">Explore Our Services</a>
+        </div>
+        <div class="hero-stats fade-in-5">
+            <div class="hero-stat">
+                <h3>7</h3>
+                <p>Target Industries</p>
+            </div>
+            <div class="hero-stat">
+                <h3>54</h3>
+                <p>African Countries Accessible</p>
+            </div>
+            <div class="hero-stat">
+                <h3>Ghana</h3>
+                <p>Established Operations Base</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- THREE PILLARS OVERVIEW -->
+<section>
+    <div class="section-inner">
+        <div class="reveal">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title">Three pillars. One partnership.</h2>
+            <p class="section-subtitle">From initial market research through ongoing operations and investment sourcing, we are with you for the full journey.</p>
+        </div>
+        <div class="grid-3 pillars">
+            <div class="card pillar-card reveal">
+                <div class="num-accent">01</div>
+                <h3>Market Entry and Access</h3>
+                <p>We open doors that take years to build. Strategic relationship building, regulatory navigation, and cultural intelligence for any African market, starting from our established Ghana base.</p>
+            </div>
+            <div class="card pillar-card reveal">
+                <div class="num-accent">02</div>
+                <h3>Operational Support</h3>
+                <p>Markets don't stop being complex after you enter them. We provide comprehensive operational oversight, crisis management, and network leveraged solutions for every challenge.</p>
+            </div>
+            <div class="card pillar-card reveal">
+                <div class="num-accent">03</div>
+                <h3>Investment Project Sourcing</h3>
+                <p>Direct access to vetted, investment ready projects across Africa's growth sectors. Opportunities that aren't widely marketed, sourced through our network and matched to your criteria.</p>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:3rem;" class="reveal">
+            <a href="/services" class="btn-secondary">Explore All Services →</a>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- WHY IONYA -->
+<section class="section-alt">
+    <div class="section-inner">
+        <div class="grid-2-1">
+            <div class="reveal">
+                <div class="section-label">Why Ionya</div>
+                <h2 class="section-title">We're the network you need but don't have</h2>
+                <p style="color:var(--text-secondary); font-size:1.02rem; line-height:1.85; margin-top:1.5rem;">
+                    Most consultancies hand you a strategy document and walk away. We stay. We solve the problems that emerge when your shipment is stuck at a port, when regulations change overnight, when the relationship with a local partner needs navigating. Our network ensures every challenge has a solution.
+                </p>
+                <div class="grid-2" style="margin-top:2rem; gap:1.2rem;">
+                    <div class="check-item">
+                        <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                        <span>On ground presence in Ghana, not fly in consultants</span>
+                    </div>
+                    <div class="check-item">
+                        <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                        <span>Network based due diligence, not fragmented consulting</span>
+                    </div>
+                    <div class="check-item">
+                        <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                        <span>Exclusive investment deal flow you can't find elsewhere</span>
+                    </div>
+                    <div class="check-item">
+                        <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                        <span>Government relationships built in from day one</span>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal">
+                <div class="quote-box">
+                    <p>"We're not McKinsey. We're better for your African expansion. Our clients don't pay for a global brand. They pay for the network that took us years to build, the operational expertise that keeps them running, and the deals they can't find anywhere else."</p>
+                    <cite>The Ionya Approach</cite>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- INDUSTRIES OVERVIEW -->
+<section>
+    <div class="section-inner">
+        <div class="reveal">
+            <div class="section-label">Industries</div>
+            <h2 class="section-title">Deep expertise across Africa's critical growth sectors</h2>
+        </div>
+        <div class="grid-4 reveal" style="margin-top:3rem;">
+            <div class="industry-card">
+                <span class="industry-icon">⛏</span>
+                <h4>Mining and Natural Resources</h4>
+                <p>Gold, uranium, tantalum, lithium and all major commodities</p>
+            </div>
+            <div class="industry-card">
+                <span class="industry-icon">⚡</span>
+                <h4>Energy and Renewable Power</h4>
+                <p>Upstream, downstream, and renewable energy projects</p>
+            </div>
+            <div class="industry-card">
+                <span class="industry-icon">🏥</span>
+                <h4>Healthcare and Medical</h4>
+                <p>Medical services, devices, and health infrastructure</p>
+            </div>
+            <div class="industry-card">
+                <span class="industry-icon">🌾</span>
+                <h4>Agriculture and AgriTech</h4>
+                <p>Agricultural operations and technology solutions</p>
+            </div>
+            <div class="industry-card">
+                <span class="industry-icon">🛢</span>
+                <h4>Oil and Gas</h4>
+                <p>Exploration, production, and infrastructure</p>
+            </div>
+            <div class="industry-card">
+                <span class="industry-icon">🏗</span>
+                <h4>Utilities and Infrastructure</h4>
+                <p>Critical infrastructure development and management</p>
+            </div>
+            <div class="industry-card">
+                <span class="industry-icon">🏟</span>
+                <h4>Sports</h4>
+                <p>Sports investment, development, and strategic partnerships</p>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:3rem;" class="reveal">
+            <a href="/who-we-serve" class="btn-secondary">See Who We Serve →</a>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CTA -->
+<section class="section-alt cta-section">
+    <div class="section-inner">
+        <div class="cta-content reveal">
+            <div class="section-label">Let's Talk</div>
+            <h2 class="section-title">Ready to move on Africa the right way?</h2>
+            <p class="section-subtitle">Whether you're planning your first entry into Ghana, facing operational challenges across multiple countries, or seeking investment opportunities in Africa's growth sectors.</p>
+            <div class="cta-actions">
+                <a href="/contact" class="btn-primary">Start a Conversation →</a>
+                <a href="/track-record" class="btn-secondary">See Our Track Record</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-left">© 2026 Ionya. All rights reserved.</div>
+        <div class="footer-right">
+            <a href="/services">Services</a>
+            <a href="/about">About</a>
+            <a href="/who-we-serve">Who We Serve</a>
+            <a href="/track-record">Track Record</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
