@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Record | Ionya</title>
+    <meta name="description" content="Ionya's track record of delivering African market entry, operational support, and investment project sourcing for international companies.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .case-grid { margin-top: 3.5rem; display: flex; flex-direction: column; gap: 3rem; }
+        .case-card {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 8px; overflow: hidden;
+        }
+        .case-left {
+            padding: 3rem; border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .case-right { padding: 3rem; background: rgba(200,149,62,0.02); }
+        .case-tag { margin-bottom: 1.2rem; }
+        .case-left h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin-bottom: 0.8rem; }
+        .case-left p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.75; }
+        .case-detail { margin-bottom: 1.5rem; }
+        .case-detail-label {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem;
+        }
+        .case-detail-value { font-size: 0.95rem; color: var(--text-primary); line-height: 1.6; }
+        .case-outcome {
+            padding-top: 1.2rem; border-top: 1px solid var(--border);
+        }
+        .case-outcome-label {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--gold-primary); margin-bottom: 0.4rem;
+        }
+        .case-outcome-value { font-size: 0.95rem; color: var(--text-primary); line-height: 1.6; }
+        .client-spotlight {
+            margin-top: 4rem; padding: 3rem;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+        }
+        .client-spotlight h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .client-spotlight .cs-type { font-size: 0.85rem; color: var(--gold-primary); font-weight: 600; margin-bottom: 1.5rem; }
+        .cs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .cs-col h4 {
+            font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.8rem;
+        }
+        .cs-col p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+        .approach-section { margin-top: 3.5rem; }
+        .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .approach-card {
+            padding: 2rem; border: 1px solid var(--border); border-radius: 8px;
+        }
+        .approach-card h4 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; margin-bottom: 0.6rem; }
+        .approach-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
+        .approach-label { font-size: 0.72rem; color: var(--gold-primary); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        @media (max-width: 768px) {
+            .case-card { grid-template-columns: 1fr; }
+            .case-left { border-right: none; border-bottom: 1px solid var(--border); }
+            .cs-grid, .approach-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo"><img src="ionya-logo-transparent.png" alt="Ionya"></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/services">Services</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/who-we-serve">Who We Serve</a></li>
+            <li><a href="/track-record" class="active">Track Record</a></li>
+            <li><a href="/contact" class="nav-cta">Get in Touch</a></li>
+        </ul>
+        <div class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></div>
+    </div>
+</nav>
+
+<section class="page-hero">
+    <div class="section-inner">
+        <div class="section-label fade-in-1">Track Record</div>
+        <h1 class="fade-in-2">Real projects. <em>Real</em> outcomes.</h1>
+        <p class="lead fade-in-3">We measure our success by what we deliver, not what we promise. Here are some of the projects we've sourced, facilitated, and supported for our clients.</p>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section>
+    <div class="section-inner">
+        <div class="reveal">
+            <div class="section-label">Projects Delivered</div>
+            <h2 class="section-title">Deals sourced and opportunities created</h2>
+        </div>
+        <div class="case-grid">
+
+            <div class="case-card reveal">
+                <div class="case-left">
+                    <span class="tag case-tag">Mining | Ghana</span>
+                    <h3>Gold Mining Acquisition</h3>
+                    <p>Sourced a gold mining concession for a mid tier producer client. Facilitated government approvals, coordinated technical due diligence through our network of mining engineers and geologists, and now provide ongoing operational oversight for the asset.</p>
+                </div>
+                <div class="case-right">
+                    <div class="case-detail">
+                        <div class="case-detail-label">Commodity</div>
+                        <div class="case-detail-value">Gold</div>
+                    </div>
+                    <div class="case-detail">
+                        <div class="case-detail-label">Production Capacity</div>
+                        <div class="case-detail-value">50,000 oz annual production</div>
+                    </div>
+                    <div class="case-detail">
+                        <div class="case-detail-label">Our Role</div>
+                        <div class="case-detail-value">Deal sourcing, government engagement, due diligence coordination, operational support</div>
+                    </div>
+                    <div class="case-outcome">
+                        <div class="case-outcome-label">Outcome</div>
+                        <div class="case-outcome-value">Deal closed. Ongoing operational oversight in place.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-card reveal">
+                <div class="case-left">
+                    <span class="tag case-tag">Mining | Central Asia</span>
+                    <h3>Uranium Mining Opportunity</h3>
+                    <p>Identified and delivered a development stage uranium deposit opportunity for our client. Built network on demand in a new geography outside Africa, conducted market intelligence, and facilitated introductions to project owners and regulatory authorities.</p>
+                </div>
+                <div class="case-right">
+                    <div class="case-detail">
+                        <div class="case-detail-label">Commodity</div>
+                        <div class="case-detail-value">Uranium</div>
+                    </div>
+                    <div class="case-detail">
+                        <div class="case-detail-label">Location</div>
+                        <div class="case-detail-value">Kyrgyzstan</div>
+                    </div>
+                    <div class="case-detail">
+                        <div class="case-detail-label">Our Role</div>
+                        <div class="case-detail-value">Network building in new geography, market intelligence, introductions to project owners</div>
+                    </div>
+                    <div class="case-outcome">
+                        <div class="case-outcome-label">Outcome</div>
+                        <div class="case-outcome-value">High quality opportunity delivered for client evaluation.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-card reveal">
+                <div class="case-left">
+                    <span class="tag case-tag">Critical Minerals | Confidential</span>
+                    <h3>Tantalum Investment Opportunity</h3>
+                    <p>Connected a critical minerals focused fund with a tantalum opportunity in the high demand electronics and EV battery supply chain. Currently supporting due diligence on a significant investment with a clear path to operational launch.</p>
+                </div>
+                <div class="case-right">
+                    <div class="case-detail">
+                        <div class="case-detail-label">Commodity</div>
+                        <div class="case-detail-value">Tantalum (critical mineral for electronics and EV batteries)</div>
+                    </div>
+                    <div class="case-detail">
+                        <div class="case-detail-label">Investment Size</div>
+                        <div class="case-detail-value">$25M with path to operational launch in 12 months</div>
+                    </div>
+                    <div class="case-detail">
+                        <div class="case-detail-label">Our Role</div>
+                        <div class="case-detail-value">Opportunity identification, investor connection, due diligence support</div>
+                    </div>
+                    <div class="case-outcome">
+                        <div class="case-outcome-label">Status</div>
+                        <div class="case-outcome-value">Currently under active evaluation.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CLIENT SPOTLIGHT -->
+<section class="section-alt">
+    <div class="section-inner">
+        <div class="reveal">
+            <div class="section-label">Partnership Model</div>
+            <h2 class="section-title">How ongoing partnerships work</h2>
+        </div>
+        <div class="client-spotlight reveal">
+            <h3>Australian Corporate Advisory Firm</h3>
+            <div class="cs-type">Ongoing Retainer Relationship | Mining Investment Sourcing</div>
+            <div class="cs-grid">
+                <div class="cs-col">
+                    <h4>What They Needed</h4>
+                    <p>A consistent pipeline of vetted African mining opportunities for their portfolio of ASX listed mining entities. They needed on ground intelligence and relationship access they couldn't build quickly, a partner who understands both the mining sector and African operational complexity, and deal flow matching their portfolio companies' specific investment criteria.</p>
+                </div>
+                <div class="cs-col">
+                    <h4>What We Delivered</h4>
+                    <p>Curated opportunities across multiple commodities including gold, uranium, and tantalum. Pre screened projects with preliminary due diligence completed before presentation. Direct introductions to project owners and government contacts. An operational support framework for the post investment phase. The relationship continues as an ongoing retainer with consistent deal flow delivery.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- WHAT MAKES US DIFFERENT -->
+<section>
+    <div class="section-inner">
+        <div class="reveal">
+            <div class="section-label">Our Approach</div>
+            <h2 class="section-title">Why our clients stay</h2>
+            <p class="section-subtitle">We don't source deals and disappear. We stay through the entire investment lifecycle.</p>
+        </div>
+        <div class="approach-grid">
+            <div class="approach-card reveal">
+                <div class="approach-label">Traditional Brokers</div>
+                <h4>Source deals and disappear</h4>
+                <p>No post deal support. Transactional relationship. Fragmented due diligence through separate consultants. Long timelines with limited intelligence.</p>
+            </div>
+            <div class="approach-card reveal" style="border-color: var(--gold-primary);">
+                <div class="approach-label">Ionya Approach</div>
+                <h4>Source deals and stay</h4>
+                <p>Operational support continues after capital deployment. Network based due diligence for integrated, faster insights. Government relations built in from day one. Long term partnership through the entire lifecycle.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="section-alt cta-section">
+    <div class="section-inner">
+        <div class="cta-content reveal">
+            <div class="section-label">Work With Us</div>
+            <h2 class="section-title">Interested in what we can deliver for you?</h2>
+            <p class="section-subtitle">Every partnership starts with a conversation about your specific situation and objectives. Let's talk.</p>
+            <div class="cta-actions">
+                <a href="/contact" class="btn-primary">Start a Conversation →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer><div class="footer-inner"><div class="footer-left">© 2026 Ionya. All rights reserved.</div><div class="footer-right"><a href="/services">Services</a><a href="/about">About</a><a href="/who-we-serve">Who We Serve</a><a href="/track-record">Track Record</a><a href="/contact">Contact</a></div></div></footer>
+<script>
+const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>50));
+document.querySelectorAll('.nav-links a').forEach(l=>l.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+const r=document.querySelectorAll('.reveal');const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');o.unobserve(x.target)}})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});r.forEach(el=>o.observe(el));
+</script>
+</body>
+</html>
