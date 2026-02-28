@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .contact-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+        .contact-layout {
+            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem;
             margin-top: 3.5rem; align-items: start;
         }
         .contact-form {
@@ -54,56 +54,26 @@
             font-size: 0.78rem; color: var(--text-muted);
             margin-top: 1rem; text-align: center;
         }
-
-        .contact-info h3 {
-            font-family: var(--font-display); font-size: 1.5rem;
-            font-weight: 500; margin-bottom: 1.5rem;
-        }
-        .contact-info p {
-            font-size: 0.95rem; color: var(--text-secondary);
-            line-height: 1.8; margin-bottom: 2rem;
-        }
-        .contact-method {
-            display: flex; gap: 1.2rem; align-items: flex-start;
-            padding: 1.5rem 0; border-bottom: 1px solid var(--border);
-        }
-        .contact-method:first-of-type { padding-top: 0; }
-        .contact-method:last-of-type { border-bottom: none; }
-        .contact-method-icon {
-            width: 44px; height: 44px; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--gold-subtle); border-radius: 8px; color: var(--gold-primary);
-        }
-        .contact-method h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.2rem; }
-        .contact-method p { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5; }
-        .contact-method a {
-            color: var(--gold-primary); text-decoration: none;
-            font-weight: 600; transition: color 0.3s ease;
-        }
-        .contact-method a:hover { color: var(--gold-light); }
-
         .expect-box {
-            margin-top: 2.5rem; padding: 2rem;
+            padding: 2.5rem;
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
         }
         .expect-box h4 {
-            font-family: var(--font-display); font-size: 1.1rem;
-            font-weight: 500; margin-bottom: 1rem;
+            font-family: var(--font-display); font-size: 1.3rem;
+            font-weight: 500; margin-bottom: 1.5rem;
         }
-        .expect-steps { display: flex; flex-direction: column; gap: 1rem; }
-        .expect-step {
-            display: flex; gap: 1rem; align-items: flex-start;
-        }
+        .expect-steps { display: flex; flex-direction: column; gap: 1.5rem; }
+        .expect-step { display: flex; gap: 1rem; align-items: flex-start; }
         .expect-num {
-            width: 28px; height: 28px; flex-shrink: 0;
+            width: 32px; height: 32px; flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
             background: var(--gold-subtle); border-radius: 50%;
-            font-size: 0.78rem; font-weight: 700; color: var(--gold-primary);
+            font-size: 0.82rem; font-weight: 700; color: var(--gold-primary);
         }
-        .expect-step p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
-
+        .expect-step-content h5 { font-size: 0.92rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .expect-step-content p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
         @media (max-width: 768px) {
-            .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
             .form-row { grid-template-columns: 1fr; }
         }
     </style>
@@ -128,18 +98,18 @@
     <div class="section-inner">
         <div class="section-label fade-in-1">Contact</div>
         <h1 class="fade-in-2">Let's start a <em>conversation</em></h1>
-        <p class="lead fade-in-3">No pitch, no pressure. Just an honest discussion about your Africa ambitions and whether we're the right partner to help.</p>
+        <p class="lead fade-in-3">No pitch, no pressure. Just an honest discussion about your Africa ambitions and whether we are the right partner to help.</p>
     </div>
 </section>
 
 <section>
     <div class="section-inner">
-        <div class="contact-grid">
+        <div class="contact-layout">
 
             <!-- FORM -->
             <div class="contact-form reveal">
                 <h3>Tell us about your situation</h3>
-                <p class="form-sub">Fill this out and we'll get back to you within 48 hours with an honest assessment of whether we can help.</p>
+                <p class="form-sub">Fill this out and we will get back to you within 48 hours with an honest assessment of whether we can help.</p>
                 <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <div class="form-row">
                         <div class="form-group">
@@ -176,59 +146,45 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Tell us more</label>
-                        <textarea id="message" name="message" placeholder="What's your situation? What are you trying to achieve? Which countries or industries are you focused on?"></textarea>
+                        <textarea id="message" name="message" placeholder="What is your situation? What are you trying to achieve? Which countries or industries are you focused on?"></textarea>
                     </div>
                     <button type="submit" class="btn-primary form-submit">Send Message →</button>
                     <p class="form-note">We respond to every genuine inquiry. No spam, no newsletters.</p>
                 </form>
             </div>
 
-            <!-- INFO -->
-            <div class="contact-info reveal">
-                <h3>Prefer to reach out directly?</h3>
-                <p>We're happy to connect however works best for you. The form is the fastest way to give us context on your situation, but you're also welcome to reach out directly.</p>
-
-                <div class="contact-method">
-                    <div class="contact-method-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    </div>
-                    <div>
-                        <h4>LinkedIn</h4>
-                        <p><a href="https://www.linkedin.com/in/nana-adjei-sarpong" target="_blank">Connect with Nana Adjei Sarpong</a></p>
-                        <p>Best for initial introductions and quick questions</p>
-                    </div>
-                </div>
-
-                <div class="contact-method">
-                    <div class="contact-method-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
-                    </div>
-                    <div>
-                        <h4>Email</h4>
-                        <p><a href="mailto:Ionyatechnologies@gmail.com">Ionyatechnologies@gmail.com</a></p>
-                        <p>For detailed inquiries and follow ups</p>
-                    </div>
-                </div>
-
-                <!-- WHAT TO EXPECT -->
+            <!-- WHAT TO EXPECT -->
+            <div class="reveal">
                 <div class="expect-box">
                     <h4>What happens next</h4>
                     <div class="expect-steps">
                         <div class="expect-step">
                             <div class="expect-num">1</div>
-                            <p>We review your inquiry and respond within 48 hours with an initial assessment</p>
+                            <div class="expect-step-content">
+                                <h5>We review your inquiry</h5>
+                                <p>Within 48 hours you will receive an initial assessment from us</p>
+                            </div>
                         </div>
                         <div class="expect-step">
                             <div class="expect-num">2</div>
-                            <p>If there's a potential fit, we schedule a 30 minute discovery call to understand your situation deeply</p>
+                            <div class="expect-step-content">
+                                <h5>Discovery call</h5>
+                                <p>If there is a potential fit, we schedule a 30 minute call to understand your situation deeply</p>
+                            </div>
                         </div>
                         <div class="expect-step">
                             <div class="expect-num">3</div>
-                            <p>We develop a tailored approach addressing your specific challenges and objectives</p>
+                            <div class="expect-step-content">
+                                <h5>Tailored approach</h5>
+                                <p>We develop a strategy addressing your specific challenges and objectives</p>
+                            </div>
                         </div>
                         <div class="expect-step">
                             <div class="expect-num">4</div>
-                            <p>We present our recommended engagement model and, if you're ready, we get to work</p>
+                            <div class="expect-step-content">
+                                <h5>We get to work</h5>
+                                <p>We present our recommended engagement model and, if you are ready, we start delivering</p>
+                            </div>
                         </div>
                     </div>
                 </div>
