@@ -98,7 +98,6 @@ section { padding: 7rem 2rem; position: relative; }
     letter-spacing: 0.15em; text-transform: uppercase;
     color: var(--gold-primary); margin-bottom: 1rem;
 }
-.section-label::before { content: ''; width: 24px; height: 1px; background: var(--gold-primary); }
 
 .section-title {
     font-family: var(--font-display);
