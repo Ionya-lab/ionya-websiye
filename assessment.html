@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Africa Readiness Assessment | Ionya</title>
+    <meta name="description" content="A two-minute assessment to understand where you stand on market entry, operations, expansion, or investment sourcing across Africa.">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ===== Assessment-specific styles, built on the site's existing tokens ===== */
+        .assess-wrap { max-width: 760px; margin: 0 auto; }
+
+        .route { display: flex; align-items: center; margin-bottom: 3rem; gap: 0; }
+        .waypoint { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); flex: none; transition: all .3s ease; }
+        .waypoint.done { background: var(--gold-primary); }
+        .waypoint.active { background: var(--gold-light); width: 13px; height: 13px; box-shadow: 0 0 12px var(--gold-glow); }
+        .leg { flex: 1; height: 1px; background: var(--border-strong); }
+        .leg.done { background: var(--gold-primary); }
+
+        .assess-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 8px; padding: 3rem; position: relative; overflow: hidden;
+        }
+        .assess-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+        }
+
+        .step-eyebrow {
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--gold-primary); margin-bottom: 0.75rem;
+        }
+        .step-q { font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; margin-bottom: 0.5rem; line-height: 1.3; }
+        .step-hint { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.75rem; }
+
+        .options { display: flex; flex-direction: column; gap: 0.7rem; }
+        .opt {
+            text-align: left; background: var(--bg-secondary); border: 1px solid var(--border);
+            border-radius: 6px; padding: 1rem 1.3rem; font-family: var(--font-body); font-size: 0.95rem;
+            color: var(--text-primary); cursor: pointer; transition: all 0.2s ease;
+        }
+        .opt:hover { border-color: var(--gold-primary); background: var(--gold-subtle); }
+        .opt.selected { border-color: var(--gold-primary); background: var(--gold-subtle); }
+        .opt:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+        .opt .opt-tags { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.3rem; letter-spacing: 0.04em; text-transform: uppercase; }
+
+        .search-input {
+            width: 100%; font-family: var(--font-body); font-size: 0.9rem; color: var(--text-primary);
+            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px;
+            padding: 0.8rem 1.1rem; margin-bottom: 0.8rem;
+        }
+        .search-input::placeholder { color: var(--text-muted); }
+        .search-input:focus { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+        .undecided-toggle {
+            text-align: left; background: transparent; border: 1px dashed var(--border-strong);
+            border-radius: 6px; padding: 0.85rem 1.1rem; font-family: var(--font-body); font-size: 0.9rem;
+            color: var(--text-secondary); cursor: pointer; margin-bottom: 1rem; transition: all 0.2s ease; width: 100%;
+        }
+        .undecided-toggle.selected { border: 1px solid var(--gold-primary); background: var(--gold-subtle); color: var(--text-primary); }
+
+        .region-divider {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-muted); margin: 1rem 0 0.5rem; padding-top: 0.6rem; border-top: 1px solid var(--border);
+        }
+        .region-divider:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+        .country-list { max-height: 260px; overflow-y: auto; padding-right: 6px; }
+        .country-opt {
+            text-align: left; width: 100%; background: var(--bg-secondary); border: 1px solid var(--border);
+            border-radius: 5px; padding: 0.7rem 1rem; font-family: var(--font-body); font-size: 0.87rem;
+            color: var(--text-primary); cursor: pointer; margin-bottom: 0.4rem; transition: all 0.2s ease;
+        }
+        .country-opt:hover { border-color: var(--gold-primary); }
+        .country-opt.selected { border-color: var(--gold-primary); background: var(--gold-subtle); }
+        .country-opt.hidden { display: none; }
+        .selected-count { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.7rem; }
+
+        .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+        .assess-btn {
+            font-family: var(--font-body); font-weight: 700; font-size: 0.88rem;
+            padding: 0.85rem 1.8rem; border-radius: 4px; border: none; cursor: pointer;
+            letter-spacing: 0.03em; transition: all 0.2s ease;
+        }
+        .assess-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+        .assess-btn-primary { background: linear-gradient(135deg, var(--gold-primary), var(--gold-light)); color: var(--bg-primary); }
+        .assess-btn-primary:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(200, 149, 62, 0.3); }
+        .assess-btn-ghost { background: transparent; color: var(--text-muted); padding: 0.85rem 0.5rem; }
+        .assess-btn-ghost:hover { color: var(--text-primary); }
+
+        .result { display: none; }
+        .seal {
+            width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--gold-primary);
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            margin: 0 auto 1.5rem; font-family: var(--font-display); padding: 0.5rem; text-align: center;
+            box-shadow: 0 0 30px var(--gold-glow);
+        }
+        .seal .grade { font-size: 1.15rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.02em; line-height: 1.1; }
+        .seal .grade-label { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.3rem; }
+
+        .result-title { font-family: var(--font-display); font-size: 1.7rem; font-weight: 500; text-align: center; margin-bottom: 0.4rem; }
+        .result-sub { text-align: center; color: var(--text-secondary); font-size: 0.92rem; margin: 0 auto 1.75rem; max-width: 46ch; }
+
+        .breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.75rem; }
+        .factor { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.1rem; }
+        .factor .flabel { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .factor .fbar { height: 4px; background: var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 0.4rem; }
+        .factor .ffill { height: 100%; background: linear-gradient(90deg, var(--gold-primary), var(--gold-light)); }
+        .factor .fval { font-size: 0.78rem; color: var(--text-muted); }
+
+        .teaser {
+            background: var(--gold-subtle); border-left: 3px solid var(--gold-primary);
+            padding: 1.1rem 1.3rem; font-size: 0.9rem; line-height: 1.65; color: var(--text-secondary); margin-bottom: 1.75rem; border-radius: 0 6px 6px 0;
+        }
+        .teaser strong { color: var(--text-primary); }
+
+        .cta-row { text-align: center; }
+        .cta-note { margin-top: 0.8rem; font-size: 0.78rem; color: var(--text-muted); }
+        .restart { display: block; margin: 1.3rem auto 0; background: none; border: none; color: var(--text-muted); font-size: 0.78rem; text-decoration: underline; cursor: pointer; }
+
+        @media (max-width: 520px) {
+            .breakdown { grid-template-columns: 1fr; }
+            .assess-card { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo"><img src="ionya-logo-transparent.png" alt="Ionya"></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/services">Services</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/who-we-serve">Who We Serve</a></li>
+            <li><a href="/track-record">Track Record</a></li>
+            <li><a href="/contact" class="nav-cta">Get in Touch</a></li>
+        </ul>
+        <div class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<section class="page-hero">
+    <div class="section-inner">
+        <div class="section-label fade-in-1">Africa Readiness Assessment</div>
+        <h1 class="fade-in-2">Where are you on your <em>Africa journey?</em></h1>
+        <p class="lead fade-in-3">A few questions, tailored to your stage — market entry, operations, expansion, or capital deployment. Two minutes for a grounded read on what's ahead.</p>
+    </div>
+</section>
+
+<section>
+    <div class="section-inner assess-wrap">
+
+        <div id="intro">
+            <div class="assess-card">
+                <p style="color: var(--text-secondary); margin-bottom: 1.75rem; line-height: 1.75;">No sign-up, no email required — just your answers and a clear read on where you stand. At the end, you can book time with us directly if you'd like the full picture.</p>
+                <button class="assess-btn assess-btn-primary" onclick="startQuiz()">Begin assessment →</button>
+            </div>
+        </div>
+
+        <div id="quiz" style="display:none;">
+            <div class="route" id="route"></div>
+            <div class="assess-card">
+                <div class="step-eyebrow" id="stepEyebrow"></div>
+                <div class="step-q" id="stepQ"></div>
+                <div class="step-hint" id="stepHint"></div>
+                <div class="options" id="stepOpts"></div>
+                <div class="nav-row">
+                    <button class="assess-btn assess-btn-ghost" id="backBtn" onclick="back()">← Back</button>
+                    <button class="assess-btn assess-btn-primary" id="nextBtn" onclick="next()" disabled>Continue →</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="result" class="result">
+            <div class="assess-card">
+                <div class="seal"><div class="grade" id="gradeLetter">—</div><div class="grade-label" id="gradeLabel">tier</div></div>
+                <div class="result-title" id="resultTitle"></div>
+                <div class="result-sub" id="resultSub"></div>
+                <div class="breakdown" id="breakdown"></div>
+                <div class="teaser" id="teaser"></div>
+                <div class="cta-row">
+                    <a class="btn-primary" href="/contact">Book a consultation</a>
+                    <div class="cta-note">Get the full breakdown — network gaps, regulatory path, and next steps specific to your situation.</div>
+                </div>
+                <button class="restart" onclick="restart()">Start over</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-left">© 2026 Ionya. All rights reserved.</div>
+        <div class="footer-right">
+            <a href="/services">Services</a><a href="/about">About</a>
+            <a href="/who-we-serve">Who We Serve</a><a href="/track-record">Track Record</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>50));
+document.querySelectorAll('.nav-links a').forEach(l=>l.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+const r=document.querySelectorAll('.reveal');const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');o.unobserve(x.target)}})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});r.forEach(el=>o.observe(el));
+</script>
+
+<script>
+/* ================= Assessment logic ================= */
+
+const SECTORS = [
+  {label:'Mining & Natural Resources', val:3},
+  {label:'Energy & Renewable Power', val:3},
+  {label:'Healthcare & Medical Services', val:2},
+  {label:'Agriculture & AgriTech', val:2},
+  {label:'Oil & Gas', val:4},
+  {label:'Utilities & Infrastructure', val:3},
+  {label:'Sports', val:2},
+  {label:'Other', val:2}
+];
+
+const COUNTRY_GROUPS = {
+  'West Africa': ['Benin','Burkina Faso','Cape Verde','Côte d’Ivoire','Gambia','Ghana','Guinea','Guinea-Bissau','Liberia','Mali','Mauritania','Niger','Nigeria','Senegal','Sierra Leone','Togo'],
+  'East Africa': ['Burundi','Comoros','Djibouti','Eritrea','Ethiopia','Kenya','Madagascar','Malawi','Mauritius','Mozambique','Rwanda','Seychelles','Somalia','South Sudan','Tanzania','Uganda','Zambia','Zimbabwe'],
+  'Southern Africa': ['Angola','Botswana','Eswatini','Lesotho','Namibia','South Africa'],
+  'Central Africa': ['Cameroon','Central African Republic','Chad','Republic of the Congo','DR Congo','Equatorial Guinea','Gabon','São Tomé and Príncipe'],
+  'North Africa': ['Algeria','Egypt','Libya','Morocco','Sudan','Tunisia']
+};
+
+const Q_PROFILE = {
+  key:'profile', type:'buttons',
+  q:'Which best describes you?', hint:'',
+  opts:[
+    {label:'Pre-Entry — planning our first move into Africa', sub:'Planning stage', val:'preentry'},
+    {label:'Established Operator — already operating, facing a live challenge', sub:'Operational stage', val:'established'},
+    {label:'Multi-Market Expander — live in one market, expanding to another', sub:'Growth stage', val:'multimarket'},
+    {label:'Investment Seeker — sourcing deals or deploying capital', sub:'Capital deployment', val:'investment'}
+  ]
+};
+
+const Q_SECTOR = { key:'sector', category:'sectorRisk', type:'buttons', q:'Which sector are you focused on?', hint:'', opts: SECTORS };
+
+const Q_MARKET = {
+  key:'market', category:'marketFactor', type:'multiselect',
+  q:'Which market — or markets?', hint:'Select one or more countries, or mark yourself undecided.',
+  groups: COUNTRY_GROUPS, undecidedVal: 3
+};
+
+const BRANCHES = {
+  preentry: {
+    gradeLabel:'entry complexity',
+    questions:[
+      { key:'presence', category:'localNetwork', type:'buttons', q:'What local presence do you have today?', hint:'',
+        opts:[{label:'None yet',val:4},{label:'A distributor or agent only',val:3},{label:'A local office',val:1},{label:'An active joint venture or partner',val:0}] },
+      { key:'regulatory', category:'regulatory', type:'buttons', q:'How familiar is your team with African regulatory environments?', hint:'',
+        opts:[{label:'New to this — first entry',val:4},{label:'Some experience elsewhere in Africa',val:2},{label:'Extensive experience',val:0}] },
+      { key:'entity', category:'regulatory', type:'buttons', q:'What entry structure are you leaning toward?', hint:'',
+        opts:[{label:'Still undecided',val:3},{label:'Distributor / agent model',val:2},{label:'Representative office',val:2},{label:'Subsidiary',val:3},{label:'Joint venture',val:2}] },
+      { key:'timeline', category:'execution', type:'buttons', q:'Target timeline to be operational?', hint:'',
+        opts:[{label:'Under 6 months',val:4},{label:'6–12 months',val:2},{label:'12+ months, or flexible',val:0}] }
+    ],
+    factorGroups:[
+      {label:'Regulatory exposure', keys:['regulatory','entity']},
+      {label:'Local network need', keys:['presence','market']},
+      {label:'Sector risk', keys:['sector']},
+      {label:'Execution pressure', keys:['timeline']}
+    ],
+    tiers:[
+      { max:0.35, grade:'A', title:'Low complexity entry', sub:'Your profile suggests a relatively clean path in — the friction will be in the details, not the fundamentals.',
+        teaser:'<strong>What this doesn\'t tell you:</strong> which specific licenses apply to your entity type, or how long local stakeholder buy-in typically takes in your target market. That\'s where a scoped conversation earns its time.' },
+      { max:0.65, grade:'B', title:'Medium complexity entry', sub:'A workable entry, but at least one or two factors here will need real groundwork before you move.',
+        teaser:'<strong>Where this usually bites:</strong> mid-complexity entries stall most often on local partner selection and regulatory sequencing, not the big strategic calls.' },
+      { max:2, grade:'C', title:'High complexity entry', sub:'Several factors are stacked against a fast, low-friction entry. That\'s not a red flag — it\'s a reason to plan properly.',
+        teaser:'<strong>What high-complexity entries need:</strong> a clear regulatory map, a vetted local network, and realistic timeline expectations set with your board upfront.' }
+    ]
+  },
+  established: {
+    gradeLabel:'support priority',
+    questions:[
+      { key:'pain', category:'severity', type:'buttons', q:'What\'s the live challenge right now?', hint:'',
+        opts:[{label:'Regulatory shift affecting operations',val:3},{label:'Local partner or stakeholder issue',val:3},{label:'Supply chain or logistics disruption',val:3},{label:'Just need more on-the-ground support',val:2}] },
+      { key:'duration', category:'severity', type:'buttons', q:'How long have you been operating in this market?', hint:'',
+        opts:[{label:'Under 1 year',val:3},{label:'1–3 years',val:2},{label:'3+ years',val:1}] },
+      { key:'urgency', category:'urgency', type:'buttons', q:'How urgent is resolving this?', hint:'',
+        opts:[{label:'Immediate — days or weeks',val:4},{label:'This quarter',val:2},{label:'Longer-term planning',val:0}] }
+    ],
+    factorGroups:[
+      {label:'Issue severity', keys:['pain','duration']},
+      {label:'Urgency', keys:['urgency']},
+      {label:'Sector risk', keys:['sector']},
+      {label:'Market factor', keys:['market']}
+    ],
+    tiers:[
+      { max:0.35, grade:'STABLE', title:'Stable, low-friction stage', sub:'Nothing here looks acute — this is maintenance, not crisis.',
+        teaser:'<strong>Worth knowing:</strong> stable operations are exactly when it\'s cheapest to shore up local network gaps before they become urgent ones.' },
+      { max:0.65, grade:'ATTN', title:'Needs attention', sub:'There\'s a live issue that\'s worth addressing before it compounds.',
+        teaser:'<strong>Common pattern:</strong> operational issues at this stage are rarely solved by pushing harder internally — they usually need a local relationship you don\'t currently have.' },
+      { max:2, grade:'URGENT', title:'Needs support now', sub:'This combination of severity and urgency is worth an immediate conversation, not a queued one.',
+        teaser:'<strong>What matters most now:</strong> speed of access to the right local stakeholders — this is precisely the crisis-management and network-leveraged work we do.' }
+    ]
+  },
+  multimarket: {
+    gradeLabel:'expansion complexity',
+    questions:[
+      { key:'marketslive', category:'experience', type:'buttons', q:'How many African markets are you already live in?', hint:'',
+        opts:[{label:'Just one so far',val:3},{label:'Two to three',val:2},{label:'Four or more',val:1}] },
+      { key:'difference', category:'novelty', type:'buttons', q:'How different is the new market from where you operate today?', hint:'',
+        opts:[{label:'Fairly similar (language, regulatory regime)',val:1},{label:'Some real differences',val:3},{label:'Significantly different context',val:4}] },
+      { key:'timeline2', category:'execution', type:'buttons', q:'Target timeline to be operational in the new market?', hint:'',
+        opts:[{label:'Under 6 months',val:4},{label:'6–12 months',val:2},{label:'12+ months, or flexible',val:0}] }
+    ],
+    factorGroups:[
+      {label:'Market novelty', keys:['difference','market']},
+      {label:'Sector risk', keys:['sector']},
+      {label:'Prior experience', keys:['marketslive']},
+      {label:'Execution pressure', keys:['timeline2']}
+    ],
+    tiers:[
+      { max:0.35, grade:'A', title:'Low complexity expansion', sub:'Your track record and the market\'s similarity to your existing footprint both work in your favor here.',
+        teaser:'<strong>Don\'t skip:</strong> even similar markets have different licensing bodies and local relationships — replication isn\'t automatic.' },
+      { max:0.65, grade:'B', title:'Medium complexity expansion', sub:'Some genuine new ground here, even with your existing African track record.',
+        teaser:'<strong>What usually differs:</strong> the local network that worked in your first market rarely transfers directly — that\'s the gap worth closing early.' },
+      { max:2, grade:'C', title:'High complexity expansion', sub:'This is closer to a fresh entry than a replication of what\'s worked before.',
+        teaser:'<strong>Treat this like a first entry:</strong> your prior experience helps with process, not with the specific relationships this market needs.' }
+    ]
+  },
+  investment: {
+    gradeLabel:'pipeline fit',
+    questions:[
+      { key:'ticket', category:'fit', type:'buttons', q:'What\'s your target ticket size?', hint:'',
+        opts:[{label:'Under $1M',val:1},{label:'$1M – $10M',val:3},{label:'$10M – $50M',val:4},{label:'$50M+',val:3}] },
+      { key:'stage', category:'fit', type:'buttons', q:'What stage of project are you looking for?', hint:'',
+        opts:[{label:'Exploration / greenfield',val:2},{label:'Development stage',val:3},{label:'Production / existing operator',val:4}] },
+      { key:'geoflex', category:'fit', type:'buttons', q:'How flexible are you on geography?', hint:'',
+        opts:[{label:'Fixed on one market',val:2},{label:'Flexible across 2–3 markets',val:3},{label:'Fully flexible across Africa',val:4}] }
+    ],
+    factorGroups:[
+      {label:'Deal scale', keys:['ticket']},
+      {label:'Stage match', keys:['stage']},
+      {label:'Geographic flexibility', keys:['geoflex']},
+      {label:'Sector focus', keys:['sector']}
+    ],
+    tiers:[
+      { max:0.35, grade:'EXPLR', title:'Exploratory fit', sub:'Workable, but narrower criteria mean fewer opportunities in the current pipeline match immediately.',
+        teaser:'<strong>Worth a conversation anyway:</strong> our pipeline shifts often — flagging your criteria now means faster matching as new opportunities surface.' },
+      { max:0.65, grade:'GOOD', title:'Good pipeline fit', sub:'Your criteria line up well with the kind of deal flow we regularly see.',
+        teaser:'<strong>Next step:</strong> a scoped conversation on current opportunities matching your ticket size and sector focus.' },
+      { max:2, grade:'STRONG', title:'Strong pipeline fit', sub:'Scale, stage, and flexibility here line up closely with our most active deal flow.',
+        teaser:'<strong>This is our sweet spot:</strong> worth prioritizing a direct conversation on live opportunities rather than waiting.' }
+    ]
+  }
+};
+
+let flow = [];
+let current = 0;
+let answers = {};
+let answerLabels = {};
+let branchKey = null;
+let selectedCountries = null;
+
+function updateMarketAnswer(qd){
+  const isUndecided = answerLabels[qd.key + '_undecided'] === true;
+  const count = selectedCountries.size;
+  let numeric;
+  if(isUndecided) numeric = qd.undecidedVal;
+  else if(count === 0) numeric = undefined;
+  else if(count === 1) numeric = ([...selectedCountries][0] === 'Ghana') ? 1 : 2;
+  else numeric = 4;
+  if(numeric === undefined) delete answers[qd.key];
+  else answers[qd.key] = numeric;
+  document.getElementById('nextBtn').disabled = (numeric === undefined);
+}
+
+function startQuiz(){
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  flow = [Q_PROFILE];
+  current = 0;
+  answers = {};
+  renderStep();
+}
+
+function buildRoute(){
+  const route = document.getElementById('route');
+  route.innerHTML = '';
+  flow.forEach((_, i) => {
+    const wp = document.createElement('div');
+    wp.className = 'waypoint' + (i < current ? ' done' : i === current ? ' active' : '');
+    route.appendChild(wp);
+    if(i < flow.length - 1){
+      const leg = document.createElement('div');
+      leg.className = 'leg' + (i < current ? ' done' : '');
+      route.appendChild(leg);
+    }
+  });
+}
+
+function renderStep(){
+  buildRoute();
+  const qd = flow[current];
+  document.getElementById('stepEyebrow').textContent = `Step ${current+1} of ${flow.length}`;
+  document.getElementById('stepQ').textContent = qd.q;
+  document.getElementById('stepHint').textContent = qd.hint || '';
+  const optsEl = document.getElementById('stepOpts');
+  optsEl.innerHTML = '';
+
+  if(qd.type === 'buttons'){
+    qd.opts.forEach((o) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt' + (answers[qd.key] !== undefined && answers[qd.key] === o.val && answerLabels[qd.key] === o.label ? ' selected' : '');
+      btn.innerHTML = o.label + (o.sub ? `<span class="opt-tags">${o.sub}</span>` : '');
+      btn.onclick = () => selectButtonOpt(qd, o);
+      optsEl.appendChild(btn);
+    });
+  } else if(qd.type === 'multiselect'){
+    if(!selectedCountries) selectedCountries = new Set(answerLabels[qd.key + '_countries'] || []);
+    let isUndecided = answerLabels[qd.key + '_undecided'] === true;
+
+    const searchBox = document.createElement('input');
+    searchBox.type = 'text';
+    searchBox.className = 'search-input';
+    searchBox.placeholder = 'Search countries…';
+    searchBox.oninput = () => {
+      const term = searchBox.value.trim().toLowerCase();
+      optsEl.querySelectorAll('.country-opt').forEach(btn => {
+        btn.classList.toggle('hidden', !btn.dataset.name.toLowerCase().includes(term));
+      });
+      optsEl.querySelectorAll('.region-divider').forEach(div => {
+        const region = div.dataset.region;
+        const anyVisible = [...optsEl.querySelectorAll(`.country-opt[data-region="${region}"]`)].some(b => !b.classList.contains('hidden'));
+        div.classList.toggle('hidden', !anyVisible);
+      });
+    };
+    optsEl.appendChild(searchBox);
+
+    const undecidedBtn = document.createElement('button');
+    undecidedBtn.className = 'undecided-toggle' + (isUndecided ? ' selected' : '');
+    undecidedBtn.textContent = isUndecided ? '✓ Undecided — need guidance' : 'Undecided — need guidance';
+    undecidedBtn.onclick = () => {
+      isUndecided = !isUndecided;
+      if(isUndecided) selectedCountries.clear();
+      answerLabels[qd.key + '_undecided'] = isUndecided;
+      answerLabels[qd.key + '_countries'] = [...selectedCountries];
+      updateMarketAnswer(qd);
+      renderStep();
+    };
+    optsEl.appendChild(undecidedBtn);
+
+    const listWrap = document.createElement('div');
+    listWrap.className = 'country-list';
+    Object.keys(qd.groups).forEach(region => {
+      const div = document.createElement('div');
+      div.className = 'region-divider';
+      div.dataset.region = region;
+      div.textContent = region;
+      listWrap.appendChild(div);
+      qd.groups[region].forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'country-opt' + (selectedCountries.has(c) ? ' selected' : '');
+        btn.dataset.name = c;
+        btn.dataset.region = region;
+        btn.textContent = (selectedCountries.has(c) ? '✓ ' : '') + c;
+        btn.onclick = () => {
+          if(selectedCountries.has(c)) selectedCountries.delete(c);
+          else selectedCountries.add(c);
+          if(selectedCountries.size > 0) isUndecided = false;
+          answerLabels[qd.key + '_undecided'] = isUndecided;
+          answerLabels[qd.key + '_countries'] = [...selectedCountries];
+          updateMarketAnswer(qd);
+          renderStep();
+        };
+        listWrap.appendChild(btn);
+      });
+    });
+    optsEl.appendChild(listWrap);
+
+    const countLabel = document.createElement('div');
+    countLabel.className = 'selected-count';
+    countLabel.textContent = isUndecided ? 'Marked as undecided' : `${selectedCountries.size} market${selectedCountries.size===1?'':'s'} selected`;
+    optsEl.appendChild(countLabel);
+
+    updateMarketAnswer(qd);
+  }
+
+  document.getElementById('backBtn').style.visibility = current === 0 ? 'hidden' : 'visible';
+  document.getElementById('nextBtn').disabled = answers[qd.key] === undefined;
+  document.getElementById('nextBtn').textContent = (current === flow.length - 1) ? 'See my result →' : 'Continue →';
+}
+
+function selectButtonOpt(qd, o){
+  answers[qd.key] = o.val;
+  answerLabels[qd.key] = o.label;
+  if(qd.key === 'profile'){
+    branchKey = o.val;
+    const branch = BRANCHES[branchKey];
+    flow = [Q_PROFILE, Q_SECTOR, Q_MARKET, ...branch.questions];
+  }
+  renderStep();
+}
+
+function next(){
+  const qd = flow[current];
+  if(answers[qd.key] === undefined) return;
+  if(current === flow.length - 1) showResult();
+  else { current++; renderStep(); }
+}
+
+function back(){
+  if(current === 0) return;
+  current--;
+  renderStep();
+}
+
+function restart(){
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('intro').style.display = 'block';
+  document.getElementById('quiz').style.display = 'none';
+  flow = [Q_PROFILE];
+  current = 0;
+  answers = {};
+  answerLabels = {};
+  branchKey = null;
+  selectedCountries = null;
+}
+
+function keyMax(qd){ return Math.max(...qd.opts.map(o=>o.val)); }
+
+function showResult(){
+  document.getElementById('quiz').style.display = 'none';
+  const resultEl = document.getElementById('result');
+  resultEl.style.display = 'block';
+
+  const branch = BRANCHES[branchKey];
+
+  let rawScore = 0, maxScore = 0;
+  flow.forEach(qd => {
+    if(qd.key === 'profile') return;
+    rawScore += answers[qd.key];
+    if(qd.type === 'buttons') maxScore += keyMax(qd);
+    else if(qd.type === 'multiselect') maxScore += 4;
+  });
+  const pct = rawScore / maxScore;
+  const tier = branch.tiers.find(t => pct <= t.max);
+
+  document.getElementById('gradeLetter').textContent = tier.grade;
+  document.getElementById('gradeLabel').textContent = branch.gradeLabel;
+  document.getElementById('resultTitle').textContent = tier.title;
+  document.getElementById('resultSub').textContent = tier.sub;
+  document.getElementById('teaser').innerHTML = tier.teaser;
+
+  const breakdownEl = document.getElementById('breakdown');
+  breakdownEl.innerHTML = '';
+  branch.factorGroups.forEach(fg => {
+    let sum = 0, max = 0;
+    fg.keys.forEach(k => {
+      const qd = flow.find(q => q.key === k);
+      if(!qd) return;
+      sum += answers[k];
+      if(qd.type === 'buttons') max += keyMax(qd);
+      else if(qd.type === 'multiselect') max += 4;
+    });
+    const fpct = max ? Math.round((sum/max)*100) : 0;
+    const div = document.createElement('div');
+    div.className = 'factor';
+    div.innerHTML = `<div class="flabel">${fg.label}</div><div class="fbar"><div class="ffill" style="width:${fpct}%"></div></div><div class="fval">${fpct}%</div>`;
+    breakdownEl.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>
