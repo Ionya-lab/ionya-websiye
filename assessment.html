@@ -15,6 +15,14 @@
         /* ===== Assessment-specific styles, built on the site's existing tokens ===== */
         .assess-wrap { max-width: 760px; margin: 0 auto; }
 
+        /* Center this page's hero only — doesn't affect other pages' page-hero styling */
+        .page-hero .section-inner { text-align: center; }
+        .page-hero .section-label { justify-content: center; }
+        .page-hero h1 { margin-left: auto; margin-right: auto; }
+        .page-hero .lead { margin-left: auto; margin-right: auto; }
+        #intro .assess-card p { text-align: center; }
+        #intro .assess-card { text-align: center; }
+
         .route { display: flex; align-items: center; margin-bottom: 3rem; gap: 0; }
         .waypoint { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); flex: none; transition: all .3s ease; }
         .waypoint.done { background: var(--gold-primary); }
@@ -150,7 +158,7 @@
     <div class="section-inner">
         <div class="section-label fade-in-1">Africa Readiness Assessment</div>
         <h1 class="fade-in-2">Where are you on your <em>Africa journey?</em></h1>
-        <p class="lead fade-in-3">A few questions, tailored to your stage — market entry, operations, expansion, or capital deployment. Two minutes for a grounded read on what's ahead.</p>
+        <p class="lead fade-in-3">Most people already have the strategy. What doesn't always translate is executing it in a market like Africa.</p>
     </div>
 </section>
 
@@ -159,7 +167,7 @@
 
         <div id="intro">
             <div class="assess-card">
-                <p style="color: var(--text-secondary); margin-bottom: 1.75rem; line-height: 1.75;">No sign-up, no email required — just your answers and a clear read on where you stand. At the end, you can book time with us directly if you'd like the full picture.</p>
+                <p style="color: var(--text-secondary); margin-bottom: 1.75rem; line-height: 1.75;">Find out how ready you are.</p>
                 <button class="assess-btn assess-btn-primary" onclick="startQuiz()">Begin assessment →</button>
             </div>
         </div>
